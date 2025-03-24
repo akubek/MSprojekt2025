@@ -5,14 +5,15 @@ y2=t(y2)
 
 data_list=list(y1,y2)
 
-#wykres pudełkowy 2 zerstawów danych
-#wartość średnia, kwartale
+#wykres pudełkowy 2 zestawów danych
+#mediana, kwartale
 boxplot(data_list,names = c("Plik 1", "Plik 2"),
         main = "Wykres pudelkowy - Mediana i Kwartale",
         ylab = "Wartosci", col = c("lightblue", "lightgreen"))
 
 
 #średnia i odchylenie standardowe
+#wartość oczekiwana rozkładu normalnego - średnia
 sr1=mean(y1)
 sr2=mean(y2)
 odch1=sd(y1)
