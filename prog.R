@@ -14,6 +14,7 @@ boxplot(data_list,names = c("Plik 1", "Plik 2"),
         ylab = "Wartosci", col = c("lightblue", "lightgreen"))
 
 
+
 #średnia i odchylenie standardowe
 #wartość oczekiwana rozkładu normalnego - średnia
 sr1=mean(y1)
@@ -21,11 +22,27 @@ sr2=mean(y2)
 odch1=sd(y1)
 odch2=sd(y2)
 
+#wykres pudełkowy
+#wekt 5el - i boxplot
+# 1 - min
+# 2 - (sr - odchylenie)
+# 3 - sr
+# 4 - (sr + odchylenie)
+# 5 - max
+w1 = c(min(y1),sr1-odch1,sr1,sr1+odch1,max(y1))
+w2 = c(min(y2),sr2-odch2,sr2,sr2+odch2,max(y2))
+wartosci=list(w1,w2)
+boxplot(wartosci,names = c("Plik 1", "Plik 2"),
+        main = "Wykres pudelkowy - Średnia i odchylenie standardowe",
+        ylab = "Wartosci", col = c("lightblue", "lightgreen"))
+
+
+#wykres zwykły
 srednie=c(sr1,sr2)
 odchylenia=c(odch1,odch2)
 
 plot(1:2,srednie,
-     main="Srednia i Odchylenie Standardowe",
+     main="Średnia i Odchylenie Standardowe",
      xlab="Pliki",
      ylab="Wartosci",
      xaxt="n",
@@ -38,6 +55,11 @@ arrows(x0 = 1:2,
 axis(1,at=1:2,labels=c("Plik 1", "Plik 2"))
 
 #POLECENIE 2
+
+#szreg rozdzielczy
+#il. grup - pierw z l. obserwacji
+#histogram - hist()
+#which.max() - moda
 
 # Miary przecietne - położenia:
 # - srednia
@@ -58,6 +80,9 @@ axis(1,at=1:2,labels=c("Plik 1", "Plik 2"))
 # - skośność a_s
 # - kurtoza krt
 # - eksces g_2
+
+#cumsum() - suma skumulowana
+#findInterval()
 
 
 
