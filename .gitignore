@@ -1,5 +1,3 @@
-.Rproj*
-.RData
-.Rhistory
+.*
+!.gitignore
 *.Rproj
-.Rproj.user
