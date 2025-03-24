@@ -5,6 +5,8 @@ y2=t(y2)
 
 data_list=list(y1,y2)
 
+#POLECENIE 1
+
 #wykres pudełkowy 2 zestawów danych
 #mediana, kwartale
 boxplot(data_list,names = c("Plik 1", "Plik 2"),
@@ -34,5 +36,29 @@ arrows(x0 = 1:2,
        y1 = srednie+odchylenia,
        angle = 90, code = 3, length = 0.1, col = "red")
 axis(1,at=1:2,labels=c("Plik 1", "Plik 2"))
+
+#POLECENIE 2
+
+# Miary przecietne - położenia:
+# - srednia
+# - mediana
+# - moda
+# - kwartyle
+
+# Miary zróżnicowania - rozproszenia:
+# - odchylenie standardowe (obc, nieobc)
+# - wariancja(obc, nieobc)
+# - odchylenie przeciętne
+# - odchylenie przeciętne od mediany
+# - odchylenie ćwiartkowe Q
+# - współczynnik zmienności w%v
+# - pozycyjny współczynnik zmienności w%v_q
+
+# Miary asymetrii i koncentracji:
+# - skośność a_s
+# - kurtoza krt
+# - eksces g_2
+
+
 
 
