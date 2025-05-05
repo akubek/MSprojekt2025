@@ -13,3 +13,6 @@ polec2(y1,y2)
 
 
 
+#Polecenie 3
+source("polecenie_3.R")
+polec3(y1,y2)
