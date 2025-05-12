@@ -70,7 +70,6 @@ polec2 <- function(dane1,dane2) {
 
   # b) dla sz. rozdzielczego
   hist1$czest = cumsum(hist1$counts / sum(hist1$counts))
-  print(hist1$czest)
   q_rozdz1 = list(
     c("0%","25%","50%","75%","100%"),
     c(hist1$mids[hist1$czest >= 0][1],
@@ -80,10 +79,8 @@ polec2 <- function(dane1,dane2) {
       hist1$mids[hist1$czest >= 1][1]
     )
   )
-  print(q_rozdz1)
   
   hist2$czest = cumsum(hist2$counts / sum(hist2$counts))
-  print(hist2$czest)
   q_rozdz2 = list(
     c("0%","25%","50%","75%","100%"),
     c(hist2$mids[hist2$czest >= 0][1],
@@ -93,7 +90,6 @@ polec2 <- function(dane1,dane2) {
       hist2$mids[hist2$czest >= 1][1]
     )
   )
-  print(q_rozdz2)
   
   
   
@@ -125,13 +121,38 @@ polec2 <- function(dane1,dane2) {
   odch_obc_rozdz2 = sqrt(war_obc_rozdz2)
   
   
-  
-  
   # - odchylenie przeciętne
+  # szeregi szczegółowe
+  odch_przec_szcz1 = sum(abs(dane1-sr_szcz1))/dlugosc1
+  odch_przec_szcz2 = sum(abs(dane2-sr_szcz2))/dlugosc2
+  
+  # szeregi rozdzielcze
+  odch_przec_rozdz1 = sum(hist1$counts*(abs(hist1$mids-sr_roz1)))/dlugosc1
+  odch_przec_rozdz2 = sum(hist2$counts*(abs(hist2$mids-sr_roz2)))/dlugosc2
+  
   # - odchylenie przeciętne od mediany
+  # szeregi szczegółowe
+  odch_przec_med_szcz1 = sum(abs(dane1-med_szcz1))/dlugosc1
+  odch_przec_med_szcz2 = sum(abs(dane2-med_szcz2))/dlugosc2
+  
+  # szeregi rozdzielcze
+  odch_przec_med_rozdz1 = sum(hist1$counts*(abs(hist1$mids-med_rozdz1)))/dlugosc1
+  odch_przec_med_rozdz2 = sum(hist2$counts*(abs(hist2$mids-med_rozdz2)))/dlugosc2
+  
   # - odchylenie ćwiartkowe Q
+  # szeregi szczegółowe
+  odch_q_szcz1 = (q_szcz1[4] - q_szcz1[2])/2
+  odch_q_szcz2 = (q_szcz2[4] - q_szcz2[2])/2
+  
+  # szeregi rozdzielcze
+  odch_q_rozdz1 = (q_rozdz1[[2]][[4]] - q_rozdz1[[2]][[2]])/2
+  odch_q_rozdz2 = (q_rozdz2[[2]][[4]] - q_rozdz2[[2]][[2]])/2
+  
   # - współczynnik zmienności w%v
+  
+  
   # - pozycyjny współczynnik zmienności w%v_q
+  
   
   # Miary asymetrii i koncentracji:
   # - skośność a_s
@@ -165,6 +186,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - wariancja nieobciążona:",war_nieobc_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne:",odch_przec_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne od mediany:",odch_przec_med_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie ćwiartkowe Q:",odch_q_szcz1,"\n",file=plik2,append=TRUE)
   
   #walcownia 2
   cat("Walcownia 2:\n",file=plik2,append=TRUE)
@@ -181,6 +205,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - wariancja nieobciążona:",war_nieobc_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne:",odch_przec_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne od mediany:",odch_przec_med_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie ćwiartkowe Q:",odch_q_szcz2,"\n",file=plik2,append=TRUE)
   
   
   #szeregi rozdzielcze
@@ -200,6 +227,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - wariancja nieobciążona:",war_nieobc_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne:",odch_przec_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne od mediany:",odch_przec_med_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie ćwiartkowe Q:",odch_q_rozdz1,"\n",file=plik2,append=TRUE)
   
   #walcownia 2
   cat("\nSzeregi rozdzielcze:\n",file=plik2,append=TRUE)
@@ -217,6 +247,11 @@ polec2 <- function(dane1,dane2) {
   cat(" - wariancja nieobciążona:",war_nieobc_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne:",odch_przec_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie przeciętne od mediany:",odch_przec_med_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie ćwiartkowe Q:",odch_q_rozdz2,"\n",file=plik2,append=TRUE)
+  
+  
   
   
   #zamkniecie pliku

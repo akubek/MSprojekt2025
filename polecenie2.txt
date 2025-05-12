@@ -17,6 +17,9 @@ Walcownia 1:
  - wariancja nieobciążona: 2627.456 
  - odchylenie standardowe obciążone: 51.77912 
  - odchylenie standardowe nieobciążone: 51.25872 
+ - odchylenie przeciętne: 41.81 
+ - odchylenie przeciętne od mediany: 41.81 
+ - odchylenie ćwiartkowe Q: 36.875 
 Walcownia 2:
  Miary przeciętne:
  - średnia: 624.0354 
@@ -33,6 +36,9 @@ Walcownia 2:
  - wariancja nieobciążona: 6031.254 
  - odchylenie standardowe obciążone: 78.48298 
  - odchylenie standardowe nieobciążone: 77.66115 
+ - odchylenie przeciętne: 57.76337 
+ - odchylenie przeciętne od mediany: 57.46042 
+ - odchylenie ćwiartkowe Q: 38.6875 
 
 Szeregi rozdzielcze:
 Walcownia 1:
@@ -51,6 +57,9 @@ Walcownia 1:
  - wariancja nieobciążona: 2902.041 
  - odchylenie standardowe obciążone: 54.41752 
  - odchylenie standardowe nieobciążone: 53.87059 
+ - odchylenie przeciętne: 43.92 
+ - odchylenie przeciętne od mediany: 70 
+ - odchylenie ćwiartkowe Q: 25 
 
 Szeregi rozdzielcze:
 Walcownia 1:
@@ -69,3 +78,6 @@ Walcownia 1:
  - wariancja nieobciążona: 6966.977 
  - odchylenie standardowe obciążone: 84.35171 
  - odchylenie standardowe nieobciążone: 83.46842 
+ - odchylenie przeciętne: 61.76215 
+ - odchylenie przeciętne od mediany: 71.875 
+ - odchylenie ćwiartkowe Q: 50 
