@@ -22,16 +22,8 @@ polec2 <- function(dane1,dane2) {
   sr_szcz2 = mean(dane2)
   
   # b) dla sz. rozdzielczego
-  sr_roz1=0
-  for(i in 1:length(hist1)) {
-    sr_roz1 = sr_roz1 + hist1$counts[i] * hist1$mids[i]
-  }
-  sr_roz1 = sr_roz1/length(y1)
-  sr_roz2 = 0
-  for(i in 1:length(hist2)) {
-    sr_roz2 = sr_roz2 + hist2$counts[i] * hist2$mids[i]
-  }
-  sr_roz2 = sr_roz2/length(y2)
+  sr_roz1 = sum(hist1$counts * hist1$mids)/length(y1)
+  sr_roz2 = sum(hist2$counts * hist2$mids)/length(y2)
   
   # 2) mediana
   # a) dla sz. szczegółowego
@@ -39,17 +31,102 @@ polec2 <- function(dane1,dane2) {
   med_szcz2 = median(y2)
   
   # b) dla sz. rozdzielczego
+  dlugosc1 = length(dane1)
+  dlugosc2 = length(dane2)
   
-  # - moda - tylko szereg rozdzielczy
+  polowa1 = floor(dlugosc1/2)
+  polowa2 = floor(dlugosc2/2)
+  
+  csum1 = cumsum(hist1$counts)
+  csum2 = cumsum(hist2$counts)
+  
+  indx_med1 = tail(which(csum1 <= polowa1),n=1)
+  indx_med2 = tail(which(csum2 <= polowa2),n=1)
+  
+  med_rozdz1 = hist1$mids[indx_med1]
+  med_rozdz2 = hist2$mids[indx_med2]
+  
+  #jeżeli ilość elementów w szeregu jest parzysta to mediana to średnia 2 liczb
+  if(dlugosc1 %% 2 == 0) {
+    #2ga liczba do wyliczenia mediany
+    mm = tail(which(csum1 <= polowa1+1),n=1)
+    med_rozdz1 = (med_rozdz1+hist1$mids[mm])/2
+  }
+  
+  if(dlugosc2 %% 2 == 0) {
+    mm = tail(which(csum2 <= polowa2+1),n=1)
+    med_rozdz2 = (med_rozdz2+hist2$mids[mm])/2
+  }
+  
+  # 3) moda - tylko szereg rozdzielczy
   #which.max() - moda
   moda1 = hist1$mids[which.max(hist1$counts)]
   moda2 = hist2$mids[which.max(hist2$counts)]
   
-  # - kwartyle
+  # 4) kwartyle (1 i 3, 2 to mediana)
+  # a) dla sz. szczegółowego
+  q_szcz1 = quantile(dane1,na.rm=TRUE)
+  q_szcz2 = quantile(dane2,na.rm=TRUE)
+
+  # b) dla sz. rozdzielczego
+  hist1$czest = cumsum(hist1$counts / sum(hist1$counts))
+  print(hist1$czest)
+  q_rozdz1 = list(
+    c("0%","25%","50%","75%","100%"),
+    c(hist1$mids[hist1$czest >= 0][1],
+      hist1$mids[hist1$czest >= 0.25][1],
+      hist1$mids[hist1$czest >= 0.50][1],
+      hist1$mids[hist1$czest >= 0.75][1],
+      hist1$mids[hist1$czest >= 1][1]
+    )
+  )
+  print(q_rozdz1)
+  
+  hist2$czest = cumsum(hist2$counts / sum(hist2$counts))
+  print(hist2$czest)
+  q_rozdz2 = list(
+    c("0%","25%","50%","75%","100%"),
+    c(hist2$mids[hist2$czest >= 0][1],
+      hist2$mids[hist2$czest >= 0.25][1],
+      hist2$mids[hist2$czest >= 0.50][1],
+      hist2$mids[hist2$czest >= 0.75][1],
+      hist2$mids[hist2$czest >= 1][1]
+    )
+  )
+  print(q_rozdz2)
+  
+  
   
   # Miary zróżnicowania - rozproszenia:
-  # - odchylenie standardowe (obc, nieobc)
   # - wariancja(obc, nieobc)
+  # szeregi szczegółowe
+  war_nieobc_szcz1 = var(dane1)
+  war_obc_szcz1 = war_nieobc_szcz1*dlugosc1/(dlugosc1-1)
+  war_nieobc_szcz2 = var(dane2)
+  war_obc_szcz2 = war_nieobc_szcz2*dlugosc2/(dlugosc2-1)
+  
+  # szeregi rozdzielcze
+  war_nieobc_rozdz1 = sum(hist1$counts*(hist1$mids-sr_roz1)^2)/(dlugosc1-1)
+  war_obc_rozdz1 = war_nieobc_rozdz1*dlugosc1/(dlugosc1-1)
+  war_nieobc_rozdz2 = sum(hist2$counts*(hist2$mids-sr_roz2)^2)/(dlugosc2-1)
+  war_obc_rozdz2 = war_nieobc_rozdz2*dlugosc2/(dlugosc2-1)
+  
+  # - odchylenie standardowe (obc, nieobc)
+  # szeregi szczegółowe
+  odch_nieobc_szcz1 = sqrt(war_nieobc_szcz1)
+  odch_obc_szcz1 = sqrt(war_obc_szcz1)
+  odch_nieobc_szcz2 = sqrt(war_nieobc_szcz2)
+  odch_obc_szcz2 = sqrt(war_obc_szcz2)
+  
+  # szeregi rozdzielcze
+  odch_nieobc_rozdz1 = sqrt(war_nieobc_rozdz1)
+  odch_obc_rozdz1 = sqrt(war_obc_rozdz1)
+  odch_nieobc_rozdz2 = sqrt(war_nieobc_rozdz2)
+  odch_obc_rozdz2 = sqrt(war_obc_rozdz2)
+  
+  
+  
+  
   # - odchylenie przeciętne
   # - odchylenie przeciętne od mediany
   # - odchylenie ćwiartkowe Q
@@ -64,13 +141,86 @@ polec2 <- function(dane1,dane2) {
   #cumsum() - suma skumulowana
   #findInterval()
   
-  sprintf("Srednia dla szeregu szczegolowego, sr1 = %f, sr2 = %f",sr_szcz1, sr_szcz2)
-  sprintf("Srednia dla szeregu rozdzielczego, sr1 = %f, sr2 = %f",sr_roz1, sr_roz2)
+  #wyczysczenie pliku
+  close( file( "polecenie2.txt", open="w" ) )
+  #otwarcie pliku
+  #wypisanie wyników
+  plik2 = file("polecenie2.txt","a")
+  cat("Wyniki dla polecenia 2.\n",file=plik2)
   
-  sprintf("Mediana dla szeregu szczegolowego, mediana1 = %f, mediana2 = %f",mediana1, mediana2)
-  sprintf("Mediana dla szeregu rozdzielczego, sr1 = %f, sr2 = %f",sr_roz1, sr_roz2)
+  #szeregi szczegółowe
+  #walcownia 1
+  cat("\nSzeregi szczegółowe:\n",file=plik2,append=TRUE)
+  cat("Walcownia 1:\n",file=plik2,append=TRUE)
+  #miary przeciętne
+  cat(" Miary przeciętne:",file=plik2,"\n",append=TRUE)
+  cat(" - średnia:",sr_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - mediana:",med_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - moda: -brak- (tylko dla sz. rozdzielczego)\n",file=plik2,append=TRUE)
+  cat(" - kwartyle:\n",file=plik2,append=TRUE)
+  write.table(q_szcz1,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE)
+  #miary zróżnicowania
+  cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - wariancja obciążona:",war_obc_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - wariancja nieobciążona:",war_nieobc_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe obciążone:",odch_obc_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_szcz1,"\n",file=plik2,append=TRUE)
   
-  sprintf("Moda dla szeregu rozdzielczego, moda1 = %f, moda2 = %f",moda1, moda2)
+  #walcownia 2
+  cat("Walcownia 2:\n",file=plik2,append=TRUE)
+  #miary przeciętne
+  cat(" Miary przeciętne:\n",file=plik2,append=TRUE)
+  cat(" - średnia:",sr_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - mediana:",med_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - moda: -brak- (tylko dla sz. rozdzielczego)\n",file=plik2,append=TRUE)
+  cat(" - kwartyle:\n",file=plik2,append=TRUE)
+  write.table(q_szcz2,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE)
+  #miary zróżnicowania
+  cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - wariancja obciążona:",war_obc_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - wariancja nieobciążona:",war_nieobc_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe obciążone:",odch_obc_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_szcz2,"\n",file=plik2,append=TRUE)
+  
+  
+  #szeregi rozdzielcze
+  #walcownia 1
+  cat("\nSzeregi rozdzielcze:\n",file=plik2,append=TRUE)
+  cat("Walcownia 1:\n",file=plik2,append=TRUE)
+  #miary przeciętne
+  cat(" Miary przeciętne:",file=plik2,"\n",append=TRUE)
+  cat(" - średnia:",sr_roz1,"\n",file=plik2,append=TRUE)
+  cat(" - mediana:",med_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - moda:",med_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - kwartyle:\n",file=plik2,append=TRUE)
+  write.table(q_rozdz1,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE,row.names = FALSE)
+  #miary zróżnicowania
+  cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - wariancja obciążona:",war_obc_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - wariancja nieobciążona:",war_nieobc_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe obciążone:",odch_obc_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_rozdz1,"\n",file=plik2,append=TRUE)
+  
+  #walcownia 2
+  cat("\nSzeregi rozdzielcze:\n",file=plik2,append=TRUE)
+  cat("Walcownia 1:\n",file=plik2,append=TRUE)
+  #miary przeciętne
+  cat(" Miary przeciętne:",file=plik2,"\n",append=TRUE)
+  cat(" - średnia:",sr_roz2,"\n",file=plik2,append=TRUE)
+  cat(" - mediana:",med_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - moda:",med_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - kwartyle:\n",file=plik2,append=TRUE)
+  write.table(q_rozdz2,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE,row.names = FALSE)
+  #miary zróżnicowania
+  cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - wariancja obciążona:",war_obc_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - wariancja nieobciążona:",war_nieobc_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe obciążone:",odch_obc_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - odchylenie standardowe nieobciążone:",odch_nieobc_rozdz2,"\n",file=plik2,append=TRUE)
+  
+  
+  #zamkniecie pliku
+  close(plik2)
   
 }
 
