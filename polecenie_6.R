@@ -12,8 +12,8 @@ polec6 <- function(dane1,dane2) {
   sr2 = mean(dane2)
   
   #war
-  war1 = var(dane1)
-  war2 = var(dane2)
+  war1 = var(dane1)*(n1-1)/n1
+  war2 = var(dane2)*(n2-1)/n2
   
   #hipoteza 0: walcownia 1 == walcownia 2
   #statystyka t 
@@ -28,6 +28,10 @@ polec6 <- function(dane1,dane2) {
   
   #sprawdzenie hipotezy
   cat("Przy poziomie istotności 0.05, przeciał krytyczny to <",t_stud,"; +inf)\n")
+  cat("srednia 1 = ",sr1,"\n")
+  cat("srednia 2 = ",sr2,"\n")
+  cat("wariancja 1 = ",war1,"\n")
+  cat("wariancja 2 = ",war2,"\n")
   cat("statystyka t = ",t,"\n")
   cat("stopnie swobody v = ",v,"\n")
   if(t < t_stud) {
