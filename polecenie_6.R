@@ -15,7 +15,7 @@ polec6 <- function(dane1,dane2) {
   war1 = var(dane1)
   war2 = var(dane2)
   
-  #hipoteza 0: walcownia 1 > walcownia 2
+  #hipoteza 0: walcownia 1 == walcownia 2
   #statystyka t 
   t = (sr1-sr2)/sqrt((war1/n1) + (war2/n2))
   
@@ -33,6 +33,6 @@ polec6 <- function(dane1,dane2) {
   if(t < t_stud) {
     cat("Wartość nie należy do przedziału krytycznego - brak podstaw do odrzucenia hipotezy zerowej.\n")
   } else {
-    cat("Wartość należy do przedziału krytycznego - odrzucamy hipotezę zerową na korzyść hipotezy alternatywnej.\n")
+    cat("Wartość należy do przedziału krytycznego - odrzucamy hipotezę zerową na korzyść hipotezy alternatywnej .\n")
   }
 }
