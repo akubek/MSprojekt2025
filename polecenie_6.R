@@ -28,7 +28,8 @@ polec6 <- function(dane1,dane2) {
   
   #sprawdzenie hipotezy
   cat("Przy poziomie istotności 0.05, przeciał krytyczny to <",t_stud,"; +inf)\n")
-  cat("t = ",t,"\n")
+  cat("statystyka t = ",t,"\n")
+  cat("stopnie swobody v = ",v,"\n")
   if(t < t_stud) {
     cat("Wartość nie należy do przedziału krytycznego - brak podstaw do odrzucenia hipotezy zerowej.\n")
   } else {
