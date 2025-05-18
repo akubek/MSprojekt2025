@@ -56,8 +56,8 @@ polec3 <- function(dane1,dane2) {
   cat("Wartość statystyki testowej dla pierwszej walcowni: d1 = ", d1, ", dla drugiej walcowni: d2 =", d2 ,"\n")
   
   #krok 7 - zbiór krytyczny
-  wart_kryt1 = 0.1245
-  wart_kryt2 = 0.1270
+  wart_kryt1 = abs(qt(1-0.05,dlug1-1))
+  wart_kryt2 = abs(qt(1-0.05,dlug2-1))
   
   cat("Zbiór krytyczny dla walcowni pierwszej (n=50,alpha=0.05) to K1_0 = <",wart_kryt1,",1>\n")
   if(d1 < wart_kryt1) {

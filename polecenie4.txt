@@ -1,15 +1,8 @@
 Wyniki dla polecenia 4.
 Porównanie wartości krytycznych:
 dla walcowni 1:
-wartość krytyczna t_alpha/2: 2.01  
+wartość krytyczna t_alpha/2: 2.009575  
 srednia: 640.466  
 odchylenie standardowe - nieobciazone: 51.25872  
 statystyka testowa t: -1.315202  
 Statystyka testowa nie należy do przedziału krytycznego - brak podstaw do odrzucenia hipotezy zerowej.
-
-dla walcowni 2:
-wartość krytyczna t_alpha/2: 2.012  
-srednia: 624.0354  
-odchylenie standardowe - nieobciazone: 77.66115  
-statystyka testowa t: -2.316318  
-Statystyka testowa należy do przedziału krytycznego więc odrzucamy hipotezę zerową na korzyść hipotezy alternatywnej.
