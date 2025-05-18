@@ -294,9 +294,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - współczynnik zmienności w%v:",wspol_zmienn_szcz1,"%\n",file=plik2,append=TRUE)
   cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_szcz1,"%\n",file=plik2,append=TRUE)
   cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
-  cat(" - skośność:",a_s_szcz1,"%\n",file=plik2,append=TRUE)
-  cat(" - kurtoza:",krt_szcz1,"%\n",file=plik2,append=TRUE)
-  cat(" - eksces:",eksc_szcz1,"%\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_szcz1,"\n",file=plik2,append=TRUE)
   
   #walcownia 2
   cat("\nWalcownia 2:\n",file=plik2,append=TRUE)
@@ -321,9 +321,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - współczynnik zmienności w%v:",wspol_zmienn_szcz2,"%\n",file=plik2,append=TRUE)
   cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_szcz2,"%\n",file=plik2,append=TRUE)
   cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
-  cat(" - skośność:",a_s_szcz2,"%\n",file=plik2,append=TRUE)
-  cat(" - kurtoza:",krt_szcz2,"%\n",file=plik2,append=TRUE)
-  cat(" - eksces:",eksc_szcz2,"%\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_szcz2,"\n",file=plik2,append=TRUE)
   
   
   #szeregi rozdzielcze
@@ -351,9 +351,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - współczynnik zmienności w%v:",wspol_zmienn_rozdz1,"%\n",file=plik2,append=TRUE)
   cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_rozdz1,"%\n",file=plik2,append=TRUE)
   cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
-  cat(" - skośność:",a_s_rozdz1,"%\n",file=plik2,append=TRUE)
-  cat(" - kurtoza:",krt_rozdz1,"%\n",file=plik2,append=TRUE)
-  cat(" - eksces:",eksc_rozdz1,"%\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_rozdz1,"\n",file=plik2,append=TRUE)
   
   #walcownia 2
   cat("\nWalcownia 2:\n",file=plik2,append=TRUE)
@@ -378,9 +378,9 @@ polec2 <- function(dane1,dane2) {
   cat(" - współczynnik zmienności w%v:",wspol_zmienn_rozdz2,"%\n",file=plik2,append=TRUE)
   cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_rozdz2,"%\n",file=plik2,append=TRUE)
   cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
-  cat(" - skośność:",a_s_rozdz2,"%\n",file=plik2,append=TRUE)
-  cat(" - kurtoza:",krt_rozdz2,"%\n",file=plik2,append=TRUE)
-  cat(" - eksces:",eksc_rozdz2,"%\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_rozdz2,"\n",file=plik2,append=TRUE)
   
   
   #zamkniecie pliku
