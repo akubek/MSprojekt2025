@@ -5,20 +5,20 @@ y2=t(y2)
 
 #Polecenie 1
 source("polecenie_1.R")
-polec1(y1,y2)
+polec1(y1,y2) #obrazy wynikowe w plikach 'polecenie_1-1.png' oraz 'polecenie_1-2.png'
 
 #Polecenie 2
 source("polecenie_2.R")
-polec2(y1,y2)
+polec2(y1,y2) #wyniki w pliku 'polecenie2.txt' oraz 'polecenie_2-1.png' i 'polecenie_2-2.png'
 
 
 #Polecenie 3
 source("polecenie_3.R")
-polec3(y1,y2)
+polec3(y1,y2) #obrazy wynikowe w plikach 'polecenie_3-1.png' oraz 'polecenie_3-2.png'
 
 #Polecenie 4
 source("polecenie_4.R")
-polec4(y1,y2)
+polec4(y1,y2) #wyniki w pliku 'polecenie2.txt'
 
 #Polecenie 5
 source("polecenie_5.R")
