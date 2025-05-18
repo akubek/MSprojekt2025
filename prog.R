@@ -23,3 +23,7 @@ polec4(y1,y2)
 #Polecenie 5
 source("polecenie_5.R")
 polec5(y1,y2)
+
+#Polecenie 6
+source("polecenie_6.R")
+polec6(y1,y2)
