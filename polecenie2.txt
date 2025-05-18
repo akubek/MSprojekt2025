@@ -1,8 +1,9 @@
 Wyniki dla polecenia 2.
 
 Szeregi szczegółowe:
+
 Walcownia 1:
- Miary przeciętne: 
+ Miary przeciętne:
  - średnia: 640.466 
  - mediana: 637.95 
  - moda: -brak- (tylko dla sz. rozdzielczego)
@@ -13,13 +14,20 @@ Walcownia 1:
 75%	677.7
 100%	751.4
  Miary zróżnicowania:
- - wariancja obciążona: 2681.078 
+ - wariancja obciążona: 2574.907 
  - wariancja nieobciążona: 2627.456 
- - odchylenie standardowe obciążone: 51.77912 
+ - odchylenie standardowe obciążone: 50.74354 
  - odchylenie standardowe nieobciążone: 51.25872 
  - odchylenie przeciętne: 41.81 
  - odchylenie przeciętne od mediany: 41.81 
  - odchylenie ćwiartkowe Q: 36.875 
+ - współczynnik zmienności w%v: 7.92291 %
+ - pozycyjny współczynnik zmienności w%v_q: 5.780234 %
+ Miary asymetrii i koncentracji:
+ - skośność: -0.13148 %
+ - kurtoza: 2.874602 %
+ - eksces: -0.1253982 %
+
 Walcownia 2:
  Miary przeciętne:
  - średnia: 624.0354 
@@ -32,52 +40,70 @@ Walcownia 2:
 75%	658.575
 100%	822.6
  Miary zróżnicowania:
- - wariancja obciążona: 6159.578 
+ - wariancja obciążona: 5905.603 
  - wariancja nieobciążona: 6031.254 
- - odchylenie standardowe obciążone: 78.48298 
+ - odchylenie standardowe obciążone: 76.84792 
  - odchylenie standardowe nieobciążone: 77.66115 
  - odchylenie przeciętne: 57.76337 
  - odchylenie przeciętne od mediany: 57.46042 
  - odchylenie ćwiartkowe Q: 38.6875 
+ - współczynnik zmienności w%v: 12.31467 %
+ - pozycyjny współczynnik zmienności w%v_q: 6.289628 %
+ Miary asymetrii i koncentracji:
+ - skośność: 0.3706164 %
+ - kurtoza: 3.618782 %
+ - eksces: 0.618782 %
 
 Szeregi rozdzielcze:
-Walcownia 1:
- Miary przeciętne: 
- - średnia: 641 
- - mediana: 575 
- - moda: 575 
- - kwartyle:
-0%	525
-25%	625
-50%	625
-75%	675
-100%	775
- Miary zróżnicowania:
- - wariancja obciążona: 2961.266 
- - wariancja nieobciążona: 2902.041 
- - odchylenie standardowe obciążone: 54.41752 
- - odchylenie standardowe nieobciążone: 53.87059 
- - odchylenie przeciętne: 43.92 
- - odchylenie przeciętne od mediany: 70 
- - odchylenie ćwiartkowe Q: 25 
 
-Szeregi rozdzielcze:
 Walcownia 1:
- Miary przeciętne: 
- - średnia: 626.0417 
- - mediana: 575 
- - moda: 575 
+ Miary przeciętne:
+ - średnia: 642.1543 
+ - mediana: 630.4 
+ - moda (dominanta): 595.8286 
  - kwartyle:
-0%	425
-25%	575
-50%	625
-75%	675
-100%	825
+0%	526.685714285714
+25%	595.828571428571
+50%	630.4
+75%	664.971428571429
+100%	734.114285714286
  Miary zróżnicowania:
- - wariancja obciążona: 7115.211 
- - wariancja nieobciążona: 6966.977 
- - odchylenie standardowe obciążone: 84.35171 
- - odchylenie standardowe nieobciążone: 83.46842 
- - odchylenie przeciętne: 61.76215 
- - odchylenie przeciętne od mediany: 71.875 
- - odchylenie ćwiartkowe Q: 50 
+ - wariancja obciążona: 2371.722 
+ - wariancja nieobciążona: 2420.125 
+ - odchylenie standardowe obciążone: 48.70033 
+ - odchylenie standardowe nieobciążone: 49.19477 
+ - odchylenie przeciętne: 40.35177 
+ - odchylenie przeciętne od mediany: 39.41143 
+ - odchylenie ćwiartkowe Q: 34.57143 
+ - współczynnik zmienności w%v: 7.583899 %
+ - pozycyjny współczynnik zmienności w%v_q: 5.484046 %
+ Miary asymetrii i koncentracji:
+ - skośność: -0.1443057 %
+ - kurtoza: 2.696621 %
+ - eksces: -0.3033793 %
+
+Walcownia 2:
+ Miary przeciętne:
+ - średnia: 625.1432 
+ - mediana: 630.85 
+ - moda (dominanta): 630.85 
+ - kwartyle:
+0%	466.492857142857
+25%	576.064285714286
+50%	630.85
+75%	685.635714285714
+100%	795.207142857143
+ Miary zróżnicowania:
+ - wariancja obciążona: 6032.912 
+ - wariancja nieobciążona: 6161.271 
+ - odchylenie standardowe obciążone: 77.67182 
+ - odchylenie standardowe nieobciążone: 78.49377 
+ - odchylenie przeciętne: 59.16096 
+ - odchylenie przeciętne od mediany: 58.20982 
+ - odchylenie ćwiartkowe Q: 54.78571 
+ - współczynnik zmienności w%v: 12.42465 %
+ - pozycyjny współczynnik zmienności w%v_q: 8.684428 %
+ Miary asymetrii i koncentracji:
+ - skośność: 0.359725 %
+ - kurtoza: 2.924972 %
+ - eksces: -0.07502797 %

@@ -12,7 +12,14 @@ source("polecenie_2.R")
 polec2(y1,y2)
 
 
-
 #Polecenie 3
 source("polecenie_3.R")
 polec3(y1,y2)
+
+#Polecenie 4
+source("polecenie_4.R")
+polec4(y1,y2)
+
+#Polecenie 5
+source("polecenie_5.R")
+polec5(y1,y2)

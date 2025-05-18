@@ -6,14 +6,48 @@
 # b) na podstawie szeregu rozdzielczego.
 
 polec2 <- function(dane1,dane2) {
-  #szreg rozdzielczy
   #ilość grup - pierwiastek z liczby obserwacji
-  b1 = as.integer(sqrt(length(dane1)))
-  b2 = as.integer(sqrt(length(dane2)))
+  ilg1 = as.integer(sqrt(length(y1)))
+  ilg2 = as.integer(sqrt(length(y1)))
+  
+  #zmienna pomocnicza
+  przedz1 = 0:(ilg1)
+  przedz2 = 0:(ilg2)
+  
+  #przedziały / breaks - dana wejściowa dla funkcji hist()
+  r1 = max(dane1) - min(dane1)
+  b1 = przedz1*r1/ilg1 + min(dane1)
+  
+  r2 = max(dane2) - min(dane2)
+  b2 = przedz2*r2/ilg2 + min(dane2)
   
   #histogram - hist()
-  hist1 = hist(y1,breaks=b1)
-  hist2 = hist(y2,breaks=b2)
+  png("polecenie_2-1.png",width=800,height=800)
+  hist1 = hist(y1,breaks=b1,plot=FALSE)
+  plot(hist1,
+    main="Walcownia 1",
+    xaxt='n',
+    xlab="Wytrzymałość (MPa)",
+    ylab="Częstość",
+    col="aquamarine"
+  )
+  axis(1,hist1$breaks)
+  dev.off()
+  
+  png("polecenie_2-2.png",width=800,height=800)
+  hist2 = hist(y2,breaks=b2,plot=FALSE)
+  plot(hist2,
+    main="Walcownia 2",
+    xaxt='n',
+    xlab="Wytrzymałość (MPa)",
+    ylab="Częstość",
+    col="coral"
+  )
+  axis(1,hist2$breaks)
+  dev.off()
+  
+  print.table(hist1)
+  print.table(hist2)
   
   # Miary przecietne - położenia:
   # 1) średnia
@@ -30,18 +64,18 @@ polec2 <- function(dane1,dane2) {
   med_szcz1 = median(y1)
   med_szcz2 = median(y2)
   
-  # b) dla sz. rozdzielczego
+  # b) dla sz. rozdzielczego -TODO poprawic?
   dlugosc1 = length(dane1)
   dlugosc2 = length(dane2)
   
-  polowa1 = floor(dlugosc1/2)
-  polowa2 = floor(dlugosc2/2)
+  polowa1 = round(dlugosc1/2)
+  polowa2 = round(dlugosc2/2)
   
   csum1 = cumsum(hist1$counts)
   csum2 = cumsum(hist2$counts)
   
-  indx_med1 = tail(which(csum1 <= polowa1),n=1)
-  indx_med2 = tail(which(csum2 <= polowa2),n=1)
+  indx_med1 = which(csum1 > polowa1)[1]
+  indx_med2 = which(csum2 > polowa2)[1]
   
   med_rozdz1 = hist1$mids[indx_med1]
   med_rozdz2 = hist2$mids[indx_med2]
@@ -49,19 +83,22 @@ polec2 <- function(dane1,dane2) {
   #jeżeli ilość elementów w szeregu jest parzysta to mediana to średnia 2 liczb
   if(dlugosc1 %% 2 == 0) {
     #2ga liczba do wyliczenia mediany
-    mm = tail(which(csum1 <= polowa1+1),n=1)
+    mm = which(csum1 > polowa1+1)[1]
     med_rozdz1 = (med_rozdz1+hist1$mids[mm])/2
   }
   
   if(dlugosc2 %% 2 == 0) {
-    mm = tail(which(csum2 <= polowa2+1),n=1)
+    mm = which(csum2 > polowa2+1)[1]
     med_rozdz2 = (med_rozdz2+hist2$mids[mm])/2
   }
   
-  # 3) moda - tylko szereg rozdzielczy
+  # 3) moda / dominanta - tylko szereg rozdzielczy
   #which.max() - moda
   moda1 = hist1$mids[which.max(hist1$counts)]
+  # - w 1 przypadku 3 przedziały o tej samej liczebnośći - dowolny z tych
+  # w tym przypadku bierzemy pierwszy przedział z tych które mają największą liczebność
   moda2 = hist2$mids[which.max(hist2$counts)]
+  
   
   # 4) kwartyle (1 i 3, 2 to mediana)
   # a) dla sz. szczegółowego
@@ -97,15 +134,15 @@ polec2 <- function(dane1,dane2) {
   # - wariancja(obc, nieobc)
   # szeregi szczegółowe
   war_nieobc_szcz1 = var(dane1)
-  war_obc_szcz1 = war_nieobc_szcz1*dlugosc1/(dlugosc1-1)
+  war_obc_szcz1 = war_nieobc_szcz1*(dlugosc1-1)/dlugosc1
   war_nieobc_szcz2 = var(dane2)
-  war_obc_szcz2 = war_nieobc_szcz2*dlugosc2/(dlugosc2-1)
+  war_obc_szcz2 = war_nieobc_szcz2*(dlugosc2-1)/dlugosc2
   
   # szeregi rozdzielcze
   war_nieobc_rozdz1 = sum(hist1$counts*(hist1$mids-sr_roz1)^2)/(dlugosc1-1)
-  war_obc_rozdz1 = war_nieobc_rozdz1*dlugosc1/(dlugosc1-1)
+  war_obc_rozdz1 = war_nieobc_rozdz1*(dlugosc1-1)/dlugosc1
   war_nieobc_rozdz2 = sum(hist2$counts*(hist2$mids-sr_roz2)^2)/(dlugosc2-1)
-  war_obc_rozdz2 = war_nieobc_rozdz2*dlugosc2/(dlugosc2-1)
+  war_obc_rozdz2 = war_nieobc_rozdz2*(dlugosc2-1)/dlugosc2
   
   # - odchylenie standardowe (obc, nieobc)
   # szeregi szczegółowe
@@ -149,15 +186,59 @@ polec2 <- function(dane1,dane2) {
   odch_q_rozdz2 = (q_rozdz2[[2]][[4]] - q_rozdz2[[2]][[2]])/2
   
   # - współczynnik zmienności w%v
+  # szeregi szczegółowe
+  wspol_zmienn_szcz1 = (odch_obc_szcz1/sr_szcz1)*100
+  wspol_zmienn_szcz2 = (odch_obc_szcz2/sr_szcz2)*100
   
+  # szeregi rozdzielcze
+  wspol_zmienn_rozdz1 = (odch_obc_rozdz1/sr_roz1)*100
+  wspol_zmienn_rozdz2 = (odch_obc_rozdz2/sr_roz2)*100
   
   # - pozycyjny współczynnik zmienności w%v_q
+  # szeregi szczegółowe
+  wspol_zmienn_poz_szcz1 = ((q_szcz1[4] - q_szcz1[2])/(2*q_szcz1[3]))*100
+  wspol_zmienn_poz_szcz2 = ((q_szcz2[4] - q_szcz2[2])/(2*q_szcz2[3]))*100
   
+  # szeregi rozdzielcze
+  wspol_zmienn_poz_rozdz1 = ((q_rozdz1[[2]][[4]] - q_rozdz1[[2]][[2]])/(2*q_rozdz1[[2]][[3]]))*100
+  wspol_zmienn_poz_rozdz2 = ((q_rozdz2[[2]][[4]] - q_rozdz2[[2]][[2]])/(2*q_rozdz2[[2]][[3]]))*100
   
   # Miary asymetrii i koncentracji:
   # - skośność a_s
+  # szeregi szczegółowe
+  trzeci_mom_cen_szcz1 = sum((dane1-sr_szcz1)^3)/length(dane1)
+  a_s_szcz1=trzeci_mom_cen_szcz1/(odch_obc_szcz1^3)
+  trzeci_mom_cen_szcz2 = sum((dane2-sr_szcz2)^3)/length(dane2)
+  a_s_szcz2=trzeci_mom_cen_szcz2/(odch_obc_szcz2^3)
+  
+  # szeregi rozdzielcze
+  trzeci_mom_cen_rozdz1 = sum(((hist1$mids-sr_roz1)^3)*hist1$counts)/length(dane1)
+  a_s_rozdz1=trzeci_mom_cen_rozdz1/(odch_obc_rozdz1^3)
+  trzeci_mom_cen_rozdz2 = sum(((hist2$mids-sr_roz2)^3)*hist2$counts)/length(dane2)
+  a_s_rozdz2=trzeci_mom_cen_rozdz2/(odch_obc_rozdz2^3)
+  
+  
   # - kurtoza krt
+  # szeregi szczegółowe
+  pom1 = sum((dane1-sr_szcz1)^4)/length(dane1)
+  krt_szcz1 = pom1/(odch_obc_szcz1^4)
+  pom1 = sum((dane2-sr_szcz2)^4)/length(dane2)
+  krt_szcz2 = pom1/(odch_obc_szcz2^4)
+  
+  # szeregi rozdzielcze
+  pom1 = sum(((hist1$mids-sr_roz1)^4)*hist1$counts)/length(dane1)
+  krt_rozdz1=pom1/(odch_obc_rozdz1^4)
+  pom1 = sum(((hist2$mids-sr_roz2)^4)*hist2$counts)/length(dane2)
+  krt_rozdz2=pom1/(odch_obc_rozdz2^4)
+  
   # - eksces g_2
+  # szeregi szczegółowe
+  eksc_szcz1 = krt_szcz1-3
+  eksc_szcz2 = krt_szcz2-3
+  
+  # szeregi rozdzielcze
+  eksc_rozdz1 = krt_rozdz1-3
+  eksc_rozdz2 = krt_rozdz2-3
   
   #cumsum() - suma skumulowana
   #findInterval()
@@ -169,12 +250,16 @@ polec2 <- function(dane1,dane2) {
   plik2 = file("polecenie2.txt","a")
   cat("Wyniki dla polecenia 2.\n",file=plik2)
   
+  #cat("min max 1",min(dane1),max(dane1),"\n",file=plik2,append=TRUE)
+  #cat("min max 2",min(dane2),max(dane2),"\n",file=plik2,append=TRUE)
+  #cat("ilg1 ilg2",ilg1,ilg2,"\n",file=plik2,append=TRUE)
+  
   #szeregi szczegółowe
   #walcownia 1
   cat("\nSzeregi szczegółowe:\n",file=plik2,append=TRUE)
-  cat("Walcownia 1:\n",file=plik2,append=TRUE)
+  cat("\nWalcownia 1:\n",file=plik2,append=TRUE)
   #miary przeciętne
-  cat(" Miary przeciętne:",file=plik2,"\n",append=TRUE)
+  cat(" Miary przeciętne:\n",file=plik2,append=TRUE)
   cat(" - średnia:",sr_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - mediana:",med_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - moda: -brak- (tylko dla sz. rozdzielczego)\n",file=plik2,append=TRUE)
@@ -189,9 +274,15 @@ polec2 <- function(dane1,dane2) {
   cat(" - odchylenie przeciętne:",odch_przec_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie przeciętne od mediany:",odch_przec_med_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie ćwiartkowe Q:",odch_q_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - współczynnik zmienności w%v:",wspol_zmienn_szcz1,"%\n",file=plik2,append=TRUE)
+  cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_szcz1,"%\n",file=plik2,append=TRUE)
+  cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_szcz1,"%\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_szcz1,"%\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_szcz1,"%\n",file=plik2,append=TRUE)
   
   #walcownia 2
-  cat("Walcownia 2:\n",file=plik2,append=TRUE)
+  cat("\nWalcownia 2:\n",file=plik2,append=TRUE)
   #miary przeciętne
   cat(" Miary przeciętne:\n",file=plik2,append=TRUE)
   cat(" - średnia:",sr_szcz2,"\n",file=plik2,append=TRUE)
@@ -208,17 +299,23 @@ polec2 <- function(dane1,dane2) {
   cat(" - odchylenie przeciętne:",odch_przec_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie przeciętne od mediany:",odch_przec_med_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie ćwiartkowe Q:",odch_q_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - współczynnik zmienności w%v:",wspol_zmienn_szcz2,"%\n",file=plik2,append=TRUE)
+  cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_szcz2,"%\n",file=plik2,append=TRUE)
+  cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_szcz2,"%\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_szcz2,"%\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_szcz2,"%\n",file=plik2,append=TRUE)
   
   
   #szeregi rozdzielcze
   #walcownia 1
   cat("\nSzeregi rozdzielcze:\n",file=plik2,append=TRUE)
-  cat("Walcownia 1:\n",file=plik2,append=TRUE)
+  cat("\nWalcownia 1:\n",file=plik2,append=TRUE)
   #miary przeciętne
-  cat(" Miary przeciętne:",file=plik2,"\n",append=TRUE)
+  cat(" Miary przeciętne:\n",file=plik2,append=TRUE)
   cat(" - średnia:",sr_roz1,"\n",file=plik2,append=TRUE)
   cat(" - mediana:",med_rozdz1,"\n",file=plik2,append=TRUE)
-  cat(" - moda:",med_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - moda (dominanta):",moda1,"\n",file=plik2,append=TRUE)
   cat(" - kwartyle:\n",file=plik2,append=TRUE)
   write.table(q_rozdz1,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE,row.names = FALSE)
   #miary zróżnicowania
@@ -230,15 +327,20 @@ polec2 <- function(dane1,dane2) {
   cat(" - odchylenie przeciętne:",odch_przec_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie przeciętne od mediany:",odch_przec_med_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie ćwiartkowe Q:",odch_q_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - współczynnik zmienności w%v:",wspol_zmienn_rozdz1,"%\n",file=plik2,append=TRUE)
+  cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_rozdz1,"%\n",file=plik2,append=TRUE)
+  cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_rozdz1,"%\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_rozdz1,"%\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_rozdz1,"%\n",file=plik2,append=TRUE)
   
   #walcownia 2
-  cat("\nSzeregi rozdzielcze:\n",file=plik2,append=TRUE)
-  cat("Walcownia 1:\n",file=plik2,append=TRUE)
+  cat("\nWalcownia 2:\n",file=plik2,append=TRUE)
   #miary przeciętne
-  cat(" Miary przeciętne:",file=plik2,"\n",append=TRUE)
+  cat(" Miary przeciętne:\n",file=plik2,append=TRUE)
   cat(" - średnia:",sr_roz2,"\n",file=plik2,append=TRUE)
   cat(" - mediana:",med_rozdz2,"\n",file=plik2,append=TRUE)
-  cat(" - moda:",med_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - moda (dominanta):",moda2,"\n",file=plik2,append=TRUE)
   cat(" - kwartyle:\n",file=plik2,append=TRUE)
   write.table(q_rozdz2,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE,row.names = FALSE)
   #miary zróżnicowania
@@ -250,8 +352,12 @@ polec2 <- function(dane1,dane2) {
   cat(" - odchylenie przeciętne:",odch_przec_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie przeciętne od mediany:",odch_przec_med_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie ćwiartkowe Q:",odch_q_rozdz2,"\n",file=plik2,append=TRUE)
-  
-  
+  cat(" - współczynnik zmienności w%v:",wspol_zmienn_rozdz2,"%\n",file=plik2,append=TRUE)
+  cat(" - pozycyjny współczynnik zmienności w%v_q:",wspol_zmienn_poz_rozdz2,"%\n",file=plik2,append=TRUE)
+  cat(" Miary asymetrii i koncentracji:\n",file=plik2,append=TRUE)
+  cat(" - skośność:",a_s_rozdz2,"%\n",file=plik2,append=TRUE)
+  cat(" - kurtoza:",krt_rozdz2,"%\n",file=plik2,append=TRUE)
+  cat(" - eksces:",eksc_rozdz2,"%\n",file=plik2,append=TRUE)
   
   
   #zamkniecie pliku
