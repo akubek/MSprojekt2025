@@ -46,8 +46,8 @@ polec2 <- function(dane1,dane2) {
   axis(1,hist2$breaks)
   dev.off()
   
-  print.table(hist1)
-  print.table(hist2)
+  #print.table(hist1)
+  #print.table(hist2)
   
   # Miary przecietne - położenia:
   # 1) średnia
@@ -131,6 +131,21 @@ polec2 <- function(dane1,dane2) {
   
   
   # Miary zróżnicowania - rozproszenia:
+  #rozstęp
+  r_szcz1 = max(dane1) - min(dane1)
+  r_szcz2 = max(dane2) - min(dane2)
+  
+  r_rozdz1 = max(hist1$breaks) - min(hist1$breaks)
+  r_rozdz2 = max(hist2$breaks) - min(hist2$breaks)
+  
+  
+  #rozstęp międzykwartylowy
+  i_szcz1 = q_szcz1[4] - q_szcz1[2]
+  i_szcz2 = q_szcz2[4] - q_szcz2[2]
+  
+  i_rozdz1 = q_rozdz1[[2]][[4]] - q_rozdz1[[2]][[2]]
+  i_rozdz2 = q_rozdz2[[2]][[4]] - q_rozdz2[[2]][[2]]
+  
   # - wariancja(obc, nieobc)
   # szeregi szczegółowe
   war_nieobc_szcz1 = var(dane1)
@@ -267,6 +282,8 @@ polec2 <- function(dane1,dane2) {
   write.table(q_szcz1,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE)
   #miary zróżnicowania
   cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - rozstęp:",r_szcz1,"\n",file=plik2,append=TRUE)
+  cat(" - rozstęp międzykwartylowy:",i_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - wariancja obciążona:",war_obc_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - wariancja nieobciążona:",war_nieobc_szcz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_szcz1,"\n",file=plik2,append=TRUE)
@@ -292,6 +309,8 @@ polec2 <- function(dane1,dane2) {
   write.table(q_szcz2,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE)
   #miary zróżnicowania
   cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - rozstęp:",r_szcz2,"\n",file=plik2,append=TRUE)
+  cat(" - rozstęp międzykwartylowy:",i_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - wariancja obciążona:",war_obc_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - wariancja nieobciążona:",war_nieobc_szcz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_szcz2,"\n",file=plik2,append=TRUE)
@@ -320,6 +339,8 @@ polec2 <- function(dane1,dane2) {
   write.table(q_rozdz1,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE,row.names = FALSE)
   #miary zróżnicowania
   cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - rozstęp:",r_rozdz1,"\n",file=plik2,append=TRUE)
+  cat(" - rozstęp międzykwartylowy:",i_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - wariancja obciążona:",war_obc_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - wariancja nieobciążona:",war_nieobc_rozdz1,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_rozdz1,"\n",file=plik2,append=TRUE)
@@ -345,6 +366,8 @@ polec2 <- function(dane1,dane2) {
   write.table(q_rozdz2,file=plik2,append=TRUE,quote=FALSE,sep="\t",col.names = FALSE,row.names = FALSE)
   #miary zróżnicowania
   cat(" Miary zróżnicowania:\n",file=plik2,append=TRUE)
+  cat(" - rozstęp:",r_rozdz2,"\n",file=plik2,append=TRUE)
+  cat(" - rozstęp międzykwartylowy:",i_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - wariancja obciążona:",war_obc_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - wariancja nieobciążona:",war_nieobc_rozdz2,"\n",file=plik2,append=TRUE)
   cat(" - odchylenie standardowe obciążone:",odch_obc_rozdz2,"\n",file=plik2,append=TRUE)

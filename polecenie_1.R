@@ -3,15 +3,17 @@
 # 1) medianę i kwartale
 # 2) wartość oczekiwaną i odchylenie standardowe.
 
-polec1 <- function(dane1,dane2) {
+polec1 <- function(dane1,dane2) {#tworzenie funkcji polec1, ktora przyjmuje 2 argumenty
   lista_danych = list(dane1,dane2)
   
   #wykres pudełkowy 2 zestawów danych
   #mediana, kwartale
-  png("polecenie_1-1.png",width=800,height=800)
-  boxplot(lista_danych,names = c("Walcownia 1", "Walcownia 2"),
-          main = "Wykres pudełkowy - Mediana i Kwartale",
-          ylab = "Wartości", col = c("lightblue", "lightgreen"))
+  png("polecenie_1-1.png",width=900,height=850) #zapis jako zdjecie
+  boxplot(lista_danych, names = c("Walcownia 1", "Walcownia 2"),
+           main = "Wykres pudełkowy - Mediana i Kwartyle",
+           ylab = "Wartości [MPa]",
+           col = c("orange", "pink"))
+  abline(h = seq(400, 850, by = 25), col = "lightgrey", lty = 2, lwd = 1)
   dev.off()
   
   
@@ -32,10 +34,12 @@ polec1 <- function(dane1,dane2) {
   w1 = c(min(y1),sr1-odch1,sr1,sr1+odch1,max(y1))
   w2 = c(min(y2),sr2-odch2,sr2,sr2+odch2,max(y2))
   wartosci=list(w1,w2)
-  png("polecenie_1-2.png",width=800,height=800)
+  png("polecenie_1-2.png",width=900,height=850)
   boxplot(wartosci,names = c("Walcownia 1", "Walcownia 2"),
           main = "Wykres pudełkowy - Średnia i odchylenie standardowe",
-          ylab = "Wartości", col = c("lightblue", "lightgreen"))
+          ylab = "Wartości [MPa]",
+          col = c("orange", "pink"))
+  abline(h = seq(400, 850, by = 25), col = "lightgrey", lty = 2, lwd = 1)
   dev.off()
   
   

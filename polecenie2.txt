@@ -14,6 +14,8 @@ Walcownia 1:
 75%	677.7
 100%	751.4
  Miary zróżnicowania:
+ - rozstęp: 242 
+ - rozstęp międzykwartylowy: 73.75 
  - wariancja obciążona: 2574.907 
  - wariancja nieobciążona: 2627.456 
  - odchylenie standardowe obciążone: 50.74354 
@@ -40,6 +42,8 @@ Walcownia 2:
 75%	658.575
 100%	822.6
  Miary zróżnicowania:
+ - rozstęp: 383.5 
+ - rozstęp międzykwartylowy: 77.375 
  - wariancja obciążona: 5905.603 
  - wariancja nieobciążona: 6031.254 
  - odchylenie standardowe obciążone: 76.84792 
@@ -68,6 +72,8 @@ Walcownia 1:
 75%	664.971428571429
 100%	734.114285714286
  Miary zróżnicowania:
+ - rozstęp: 242 
+ - rozstęp międzykwartylowy: 69.14286 
  - wariancja obciążona: 2371.722 
  - wariancja nieobciążona: 2420.125 
  - odchylenie standardowe obciążone: 48.70033 
@@ -94,6 +100,8 @@ Walcownia 2:
 75%	685.635714285714
 100%	795.207142857143
  Miary zróżnicowania:
+ - rozstęp: 383.5 
+ - rozstęp międzykwartylowy: 109.5714 
  - wariancja obciążona: 6032.912 
  - wariancja nieobciążona: 6161.271 
  - odchylenie standardowe obciążone: 77.67182 
